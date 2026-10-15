@@ -11,7 +11,7 @@ references that are extracted from [Maven effective POMs][maven-model]:
 
 3 SBOM fields are deducted from effective POM (= after POM inheritance from parents):
 
-- `component.publisher` is filled with POM's `project.organisation.name`,
+- `component.publisher` is filled with POM's `project.organization.name`,
 - `component.description` is filled with POM's `project.description`,
 - `component.licenses[]` is filled with POM's `project.licenses[]`.
 
@@ -24,7 +24,11 @@ references that are extracted from [Maven effective POMs][maven-model]:
 | `project.ciManagement.url`                      | `build-system`
 | `project.issueManagement.url`                   | `issue-tracker`
 | `project.mailingLists[].archive` or `subscribe` | `mailing-list`
-| `project.distributionManagement.repository.url` | `distribution`
+| `project.distributionManagement.repository.url` | `distribution-intake` (CycloneDX 1.5 and later), `distribution` (earlier versions)
+| `project.distributionManagement.downloadUrl`    | `distribution`
+
+For schema versions before 1.5, a configured `downloadUrl` takes precedence over the repository URL
+because only one reference of each type is emitted.
 
 
 ## Additional External References for `metadata.component`
